@@ -35,6 +35,5 @@ public class Private {
         if (this.insurance == null || this.insurance.equals("")) this.setInsurance(p.getInsurance());
         if (this.address == null || this.address.equals("")) this.setAddress(p.getAddress());
         if (this.employerID == null || this.employerID == 0) this.setEmployerID(p.getEmployerID());
-
     }
 }
