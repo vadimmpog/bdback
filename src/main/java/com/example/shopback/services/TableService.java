@@ -1,5 +1,6 @@
 package com.example.shopback.services;
 
+import com.example.shopback.models.Private;
 import com.example.shopback.repos.*;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,15 @@ public class TableService {
     private final ProductsRepository productsRepository;
     private final TasksRepository tasksRepository;
     private final TestersRepository testersRepository;
+
+    public <T> String addRow(T model){
+        if (model instanceof Private){
+            Private s = (Private) model;
+            privateRepository.save(s);
+            return "Row saved successful";
+        }
+        return null;
+    }
 
     
 }
