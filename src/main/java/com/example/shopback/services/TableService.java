@@ -36,4 +36,19 @@ public class TableService {
         }
         return null;
     }
+
+    public <T> String updateRow(T model){
+        if (model instanceof Private){
+            Private s = (Private) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Private old = privateRepository.findById(id).get();
+                s.update(old);
+                privateRepository.save(s);
+                return "Row updated successful";
+            }
+            return "No row with such id";
+        }
+        return null;
+    }
 }
