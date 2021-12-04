@@ -28,14 +28,6 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/cart").hasAuthority("USER")
-                .antMatchers("/page").hasAnyAuthority("USER","ADMIN")
-                .antMatchers("/products/user/**").hasAnyAuthority("USER","ADMIN")
-                .antMatchers("/orders/user/**").hasAnyAuthority("USER","ADMIN")
-                .antMatchers("/products/**").hasAuthority("ADMIN")
-                .antMatchers("/orders/**").hasAuthority("ADMIN")
-                .antMatchers("/users/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
