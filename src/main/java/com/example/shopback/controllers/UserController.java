@@ -1,6 +1,6 @@
 package com.example.shopback.controllers;
 
-import com.example.shopback.models.User;
+import com.example.shopback.models.oldmodels.User;
 import com.example.shopback.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;

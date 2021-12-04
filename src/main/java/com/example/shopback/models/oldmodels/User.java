@@ -1,4 +1,4 @@
-package com.example.shopback.models;
+package com.example.shopback.models.oldmodels;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.shopback.services;
 
-import com.example.shopback.models.User;
+import com.example.shopback.models.oldmodels.User;
 import com.example.shopback.repos.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

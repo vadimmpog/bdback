@@ -12,13 +12,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order_item")
-public class OrderItem {
+@Table(name = "employees")
+public class Employees {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-    private Integer quantity;
-    private Integer productId;
-    private Integer orderId;
-    private Integer userId;
+    private Integer employerId;
+    private String mail;
+    private Integer wage;
+    private Boolean onLeave;
+    private String workplace;
 }

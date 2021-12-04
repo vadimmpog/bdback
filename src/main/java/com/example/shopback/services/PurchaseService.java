@@ -1,6 +1,8 @@
 package com.example.shopback.services;
 
-import com.example.shopback.models.*;
+import com.example.shopback.models.oldmodels.Order;
+import com.example.shopback.models.oldmodels.OrderItem;
+import com.example.shopback.models.oldmodels.User;
 import com.example.shopback.repos.*;
 import com.example.shopback.support.CartItem;
 

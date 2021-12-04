@@ -1,7 +1,7 @@
 package com.example.shopback.repos;
 
 
-import com.example.shopback.models.OrderItem;
+import com.example.shopback.models.oldmodels.OrderItem;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

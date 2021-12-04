@@ -1,7 +1,7 @@
 package com.example.shopback.controllers;
 
-import com.example.shopback.models.Order;
-import com.example.shopback.models.OrderItem;
+import com.example.shopback.models.oldmodels.Order;
+import com.example.shopback.models.oldmodels.OrderItem;
 import com.example.shopback.services.PurchaseService;
 import com.example.shopback.support.CartItem;
 import com.example.shopback.support.Tuple;

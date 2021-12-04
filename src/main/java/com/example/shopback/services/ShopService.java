@@ -1,6 +1,6 @@
 package com.example.shopback.services;
 
-import com.example.shopback.models.Product;
+import com.example.shopback.models.oldmodels.Product;
 import com.example.shopback.repos.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
