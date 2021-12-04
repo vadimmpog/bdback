@@ -18,85 +18,85 @@ public class PrivateController {
     /*-----------------------------------add-------------------------------------*/
 
     @RequestMapping(value = "/add-row-1", method = RequestMethod.POST)
-    public String addRow1(@RequestBody Private info){
+    public String addRow(@RequestBody Private info){
         return service.addRow(info);
     }
 
     @RequestMapping(value = "/add-row-2", method = RequestMethod.POST)
-    public String addRow2(@RequestBody Clients client){
-        return service.addRow2(client);
+    public String addRow(@RequestBody Clients client){
+        return service.addRow(client);
     }
 
     @RequestMapping(value = "/add-row-3", method = RequestMethod.POST)
-    public String addRow3(@RequestBody Contracts contract){
-        return service.addRow3(contract);
+    public String addRow(@RequestBody Contracts contract){
+        return service.addRow(contract);
     }
 
     @RequestMapping(value = "/add-row-4", method = RequestMethod.POST)
-    public String addRow4(@RequestBody Developers developer){
-        return service.addRow4(developer);
+    public String addRow(@RequestBody Developers developer){
+        return service.addRow(developer);
     }
 
     @RequestMapping(value = "/add-row-5", method = RequestMethod.POST)
-    public String addRow5(@RequestBody Employees employer){
-        return service.addRow5(employer);
+    public String addRow(@RequestBody Employees employer){
+        return service.addRow(employer);
     }
 
     @RequestMapping(value = "/add-row-6", method = RequestMethod.POST)
-    public String addRow6(@RequestBody Products product){
-        return service.addRow6(product);
+    public String addRow(@RequestBody Products product){
+        return service.addRow(product);
     }
 
     @RequestMapping(value = "/add-row-7", method = RequestMethod.POST)
-    public String addRow7(@RequestBody Tasks task){
-        return service.addRow7(task);
+    public String addRow(@RequestBody Tasks task){
+        return service.addRow(task);
     }
 
     @RequestMapping(value = "/add-row-8", method = RequestMethod.POST)
-    public String addRow8(@RequestBody Testers tester){
-        return service.addRow8(tester);
+    public String addRow(@RequestBody Testers tester){
+        return service.addRow(tester);
     }
 
     /*---------------------------------update------------------------------------*/
 
     @RequestMapping(value = "/update-row-1", method = RequestMethod.POST)
-    public String updateRow1(@RequestBody Private info){
+    public String updateRow(@RequestBody Private info){
         return service.updateRow(info);
     }
 
     @RequestMapping(value = "/update-row-2", method = RequestMethod.POST)
-    public String updateRow2(@RequestBody Clients client){
-        return service.updateRow1(client);
+    public String updateRow(@RequestBody Clients client){
+        return service.updateRow(client);
     }
 
     @RequestMapping(value = "/update-row-3", method = RequestMethod.POST)
-    public String updateRow3(@RequestBody Contracts contract){
-        return service.updateRow2(contract);
+    public String updateRow(@RequestBody Contracts contract){
+        return service.updateRow(contract);
     }
 
     @RequestMapping(value = "/update-row-4", method = RequestMethod.POST)
-    public String updateRow4(@RequestBody Developers developer){
-        return service.updateRow3(developer);
+    public String updateRow(@RequestBody Developers developer){
+        return service.updateRow(developer);
     }
 
     @RequestMapping(value = "/update-row-5", method = RequestMethod.POST)
-    public String updateRow5(@RequestBody Employees employer){
-        return service.updateRow4(employer);
+    public String updateRow(@RequestBody Employees employer){
+        return service.updateRow(employer);
     }
 
     @RequestMapping(value = "/update-row-6", method = RequestMethod.POST)
-    public String updateRow6(@RequestBody Products product){
-        return service.updateRow5(product);
+    public String updateRow(@RequestBody Products product){
+        return service.updateRow(product);
     }
 
     @RequestMapping(value = "/update-row-7", method = RequestMethod.POST)
-    public String updateRow7(@RequestBody Tasks task){
-        return service.updateRow7(task);
+    public String updateRow(@RequestBody Tasks task){
+        return service.updateRow(task);
     }
 
     @RequestMapping(value = "/update-row-8", method = RequestMethod.POST)
-    public String updateRow8(@RequestBody Testers tester){
-        return service.updateRow8(tester);
+    public String updateRow(@RequestBody Testers tester){
+        return service.updateRow(tester);
     }
 
     /*----------------------------------all---------------------------------------*/
@@ -146,7 +146,7 @@ public class PrivateController {
     @RequestMapping(value = "/delete-row-1", method = RequestMethod.DELETE,
         params = {"id"})
     public String deleteRow1(@RequestParam("id") Integer id){
-        return service.deleteRow(id);
+        return service.deleteRow1(id);
     }
 
     @RequestMapping(value = "/delete-row-2", method = RequestMethod.DELETE,
