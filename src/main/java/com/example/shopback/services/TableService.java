@@ -28,5 +28,12 @@ public class TableService {
         return null;
     }
 
-    
+    public <T> String deleteRow(T model){
+        if (model instanceof Private){
+            Private s = (Private) model;
+            privateRepository.deleteById(s.getId());
+            return "Row deleted successful";
+        }
+        return null;
+    }
 }
