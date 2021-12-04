@@ -19,7 +19,7 @@ public class Contracts {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private Integer projectID;
-    private Integer ClientID;
+    private Integer clientID;
     private String paymentState;
     private Date startOfContract;
     private Date endOfContract;

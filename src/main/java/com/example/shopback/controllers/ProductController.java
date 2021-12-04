@@ -1,6 +1,5 @@
 package com.example.shopback.controllers;
 import com.example.shopback.models.oldmodels.Product;
-import com.example.shopback.services.ShopService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;

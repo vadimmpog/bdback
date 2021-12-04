@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Employees {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer employerId;
+    private Integer employerID;
     private String mail;
     private Integer wage;
     private Boolean onLeave;

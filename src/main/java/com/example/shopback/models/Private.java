@@ -20,6 +20,7 @@ public class Private {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String firstname;
+    private String lastname;
     private Date birthdate;
     private String phonenum;
     private String insurance;
