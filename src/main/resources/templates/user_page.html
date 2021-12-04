@@ -1,0 +1,100 @@
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Shop</title>
+</head>
+<body>
+<h1>Главная страница</h1>
+<br>
+<a href="/cart">Корзина</a>
+<br>
+<br>
+<div id="table"></div>
+<script>
+    async function addToCart(id){
+        let productId = id;
+        console.log("input"+id);
+        let quantity = document.getElementById("input"+id).value;
+        if(quantity !== "" && quantity !== "0"){
+            let item = {
+                "productId": productId,
+                "quantity": quantity
+            }
+            await fetch("/orders/user/addToCart", {
+                method: "Post",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(item)
+            }).then(function(response){
+                if(response.ok){
+                    alert("Позиции добавлены.");
+                    location.reload();
+                }
+                else {
+                    alert("Ошибка "+ response.status)
+                }
+            });
+        }else alert("Введите количество.")
+
+    }
+
+    function createTable(response){
+        const space = document.getElementById("table");
+        let tbl = document.createElement('table');
+        tbl.style.width = '100px';
+        const tr = tbl.insertRow();
+        ["Название товара", "Описание", "Количество", "Цена"].forEach(
+            text => {
+                const td = tr.insertCell();
+                td.appendChild(document.createTextNode(text));
+                td.style.border = '1px solid black';
+            })
+        let i = 0;
+        for(const product of response){
+            const tr = tbl.insertRow();
+            Object.keys(product).forEach(key => {
+                if(key !== "id") {
+                    const td = tr.insertCell();
+                    td.appendChild(document.createTextNode(product[key]));
+                    td.style.border = '1px solid black';
+                }
+            })
+            const td = tr.insertCell();
+            let input = document.createElement("input");
+            input.type="number";
+            input.id="input"+product.id;
+            input.min="0";
+            input.max=product["quantity"];
+            input.onkeydown="return false";
+            let button =  document.createElement("button");
+            button.id=product.id;
+            button.textContent="Добавить в корзину";
+            button.onclick= function () {
+                addToCart(this.id);
+            };
+            td.appendChild(input);
+            td.appendChild(button);
+            i+=1;
+        }
+        space.appendChild(tbl);
+    }
+
+    async function load(){
+        let response = await fetch("/products/user/all")
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error("not ok");
+                }
+                return response.json()
+            });
+        createTable(response);
+    }
+
+    load();
+</script>
+<br>
+<a href="/logout">Выйти</a>
+</body>
+</html>
+
