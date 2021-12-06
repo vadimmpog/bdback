@@ -3,6 +3,7 @@ package com.example.bdback.controllers;
 import com.example.bdback.models.*;
 import com.example.bdback.services.TableService;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -182,30 +183,28 @@ public class MainController {
         return service.deleteRow("testers", id);
     }
 
-//    @RequestMapping(value = "/delete-row", method = RequestMethod.POST,
-//        params = {"id", "tablename"})
-//    public String deleteRow1(@RequestParam("id") Integer id, @RequestParam("tablename") String tablename){
-//        return service.deleteRow(tablename);
-//    }
-
     /*----------------------------------filter---------------------------------------*/
 
-    @RequestMapping(value = "/sort-group", method = RequestMethod.POST,
-            params = {"row"})
-    public <T> List<Object> groupTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody() String order){
+    @RequestMapping(value = "/sort/group", method = RequestMethod.POST)
+    public <T> List<T> groupTable(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String table = dataJson.getString("table");
+        String order = dataJson.getString("order");
         return service.sortGroup(column, table, order);
     }
 
-    @RequestMapping(value = "/sort-where", method = RequestMethod.POST,
-            params = {"row"})
-    public <T> List<T> whereTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String where){
-        return service.sortWhere(table, where);
+    @RequestMapping(value = "/private_info/where", method = RequestMethod.POST)
+    public List<Private> whereTable(@RequestBody Private info){
+        return service.sortWhere(info);
     }
 
-    @RequestMapping(value = "/sort-like", method = RequestMethod.POST,
-            params = {"row"})
-    public <T> List<T> likeTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String like){
-        return service.sortLike(table, like, column);
+    @RequestMapping(value = "/private_info/like", method = RequestMethod.POST)
+    public List<Private> likeTable(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "private_info", like);
     }
 
 }

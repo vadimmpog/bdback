@@ -30,7 +30,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
         http.authorizeRequests()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/users/register").permitAll()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/page", true)

@@ -3,8 +3,12 @@ package com.example.bdback.services;
 import com.example.bdback.models.*;
 import com.example.bdback.repos.*;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Where;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -65,12 +69,12 @@ public class TableService {
     }
 
     public String deleteRow(String table, Integer id){
-        if (table.equals("private_info")){
-            privateRepository.deleteById(id);
-            return "Row deleted successful";
-        }
         if (table.equals("clients")){
             clientsRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("private_info")){
+            privateRepository.deleteById(id);
             return "Row deleted successful";
         }
         return "Error not deleted.";
@@ -145,23 +149,54 @@ public class TableService {
     public <T> List<T> sortGroup(String column, String table, String order){
         if(table.equals("private_info")){
             if (order.equals("ASC")){
-                return (List<T>) privateRepository.orderByASC(column);
+                return (ArrayList<T>) privateRepository.findAll(Sort.by(column));
             }else if (order.equals("DESC")){
-                return (List<T>) privateRepository.orderByDESC(column);
+                return (ArrayList<T>) privateRepository.findAll(Sort.by(column).descending());
             }
         }
+//        if(table.equals("clients")){
+//            if (order.equals("ASC")){
+//                return (List<T>) privateRepository.orderByASC(column);
+//            }else if (order.equals("DESC")){
+//                return (List<T>) privateRepository.orderByDESC(column);
+//            }
+//        }
         return null;
     }
-    public <T> List<T> sortWhere(String table, String where){
-        if(table.equals("private_info")){
-            return (List<T>) privateRepository.where(where);
+    public <T> List<T> sortWhere(T model){
+        if(model instanceof Private){
+            Example<Private> ex = Example.of((Private) model);
+            return (ArrayList<T>) privateRepository.findAll(ex);
         }
         return null;
     }
-    public <T> List<T> sortLike(String table, String like, String column){
+    public <T> List<T> sortLike(String column, String table, String like){
         if(table.equals("private_info")){
-            privateRepository.like(like, column);
+            switch (column){
+                case "firstname": {
+                    return (ArrayList<T>) privateRepository.findByFirstnameLike(like);
+                }
+                case "lastname": {
+                    return (ArrayList<T>) privateRepository.findByLastnameLike(like);
+                }
+                case "birthdate": {
+                    return (ArrayList<T>) privateRepository.findByBirthdateLike(like);
+                }
+                case "phonenum": {
+                    return (ArrayList<T>) privateRepository.findByPhonenumLike(like);
+                }
+                case "insurance": {
+                    return (ArrayList<T>) privateRepository.findByInsuranceLike(like);
+                }
+                case "address": {
+                    return (ArrayList<T>) privateRepository.findByAddressLike(like);
+                }
+                case "employerId": {
+                    return (ArrayList<T>) privateRepository.findByEmployerIdLike(like);
+                }
+            }
         }
+
         return null;
     }
 
