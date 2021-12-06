@@ -100,42 +100,42 @@ public class MainController {
 
     /*----------------------------------all---------------------------------------*/
 
-    @RequestMapping(value = "/all-private", method = RequestMethod.GET)
+    @RequestMapping(value = "/private", method = RequestMethod.GET)
     public List<Private> allRows1() {
         return service.getAllPrivateRows();
     }
 
-    @RequestMapping(value = "/all-clients", method = RequestMethod.GET)
+    @RequestMapping(value = "/clients", method = RequestMethod.GET)
     public List<Clients> allRows2() {
         return service.getAllClientsRows();
     }
 
-    @RequestMapping(value = "/all-contracts", method = RequestMethod.GET)
+    @RequestMapping(value = "/contracts", method = RequestMethod.GET)
     public List<Contracts> allRows3() {
         return service.getAllContractsRows();
     }
 
-    @RequestMapping(value = "/all-developers", method = RequestMethod.GET)
+    @RequestMapping(value = "/developers", method = RequestMethod.GET)
     public List<Developers> allRows4() {
         return service.getAllDevelopersRows();
     }
 
-    @RequestMapping(value = "/all-employees", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public List<Employees> allRows5() {
         return service.getAllEmployeesRows();
     }
 
-    @RequestMapping(value = "/all-products", method = RequestMethod.GET)
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
     public List<Products> allRows6() {
         return service.getAllProductsRows();
     }
 
-    @RequestMapping(value = "/all-tasks", method = RequestMethod.GET)
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public List<Tasks> allRows7() {
         return service.getAllTasksRows();
     }
 
-    @RequestMapping(value = "/all-testers", method = RequestMethod.GET)
+    @RequestMapping(value = "/testers", method = RequestMethod.GET)
     public List<Testers> allRows8() {
         return service.getAllTestersRows();
     }
