@@ -142,14 +142,26 @@ public class TableService {
 
     /*-------------------------------------------?sort?-------------------------------------------------*/
 
-    public <T> List<T> sortGroup(String row, T model){
+    public <T> List<T> sortGroup(String column, String table, String order){
+        if(table.equals("private_info")){
+            if (order.equals("ASC")){
+                return (List<T>) privateRepository.orderByASC(column);
+            }else if (order.equals("DESC")){
+                return (List<T>) privateRepository.orderByDESC(column);
+            }
+        }
         return null;
     }
-    public <T> List<T> sortWhere(String row, T model){
+    public <T> List<T> sortWhere(String table, String where){
+        if(table.equals("private_info")){
+            return (List<T>) privateRepository.where(where);
+        }
         return null;
     }
-    public <T> List<T> sortLike(String row, T model){
-
+    public <T> List<T> sortLike(String table, String like, String column){
+        if(table.equals("private_info")){
+            privateRepository.like(like, column);
+        }
         return null;
     }
 

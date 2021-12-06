@@ -192,20 +192,20 @@ public class MainController {
 
     @RequestMapping(value = "/sort-group", method = RequestMethod.POST,
             params = {"row"})
-    public <T> List<T> groupTable(@RequestParam("row") String row, @RequestBody() T model){
-        return service.sortGroup(row, model);
+    public <T> List<Object> groupTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody() String order){
+        return service.sortGroup(column, table, order);
     }
 
     @RequestMapping(value = "/sort-where", method = RequestMethod.POST,
             params = {"row"})
-    public <T> List<T> whereTable(@RequestParam("row") String row, @RequestBody() T model){
-        return service.sortWhere(row, model);
+    public <T> List<T> whereTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String where){
+        return service.sortWhere(table, where);
     }
 
     @RequestMapping(value = "/sort-like", method = RequestMethod.POST,
             params = {"row"})
-    public <T> List<T> likeTable(@RequestParam("row") String row, @RequestBody() T model){
-        return service.sortLike(row, model);
+    public <T> List<T> likeTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String like, @RequestBody String like){
+        return service.sortLike(table, like, column);
     }
 
 }
