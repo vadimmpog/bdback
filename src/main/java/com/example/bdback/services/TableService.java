@@ -21,14 +21,44 @@ public class TableService {
     private final TestersRepository testersRepository;
 
     public <T> String addRow(T model){
+        if (model instanceof Clients){
+            Clients s = (Clients) model;
+            clientsRepository.save(s);
+            return "Row saved successful";
+        }
+        if (model instanceof Contracts){
+            Contracts s = (Contracts) model;
+            contractsRepository.save(s);
+            return "Row saved successful";
+        }
+        if (model instanceof Developers){
+            Developers s = (Developers) model;
+            developersRepository.save(s);
+            return "Row saved successful";
+        }
+        if (model instanceof Employees){
+            Employees s = (Employees) model;
+            employeesRepository.save(s);
+            return "Row saved successful";
+        }
         if (model instanceof Private){
             Private s = (Private) model;
             privateRepository.save(s);
             return "Row saved successful";
         }
-        if (model instanceof Clients){
-            Clients s = (Clients) model;
-            clientsRepository.save(s);
+        if (model instanceof Products){
+            Products s = (Products) model;
+            productsRepository.save(s);
+            return "Row saved successful";
+        }
+        if (model instanceof Tasks){
+            Tasks s = (Tasks) model;
+            tasksRepository.save(s);
+            return "Row saved successful";
+        }
+        if (model instanceof Testers){
+            Testers s = (Testers) model;
+            testersRepository.save(s);
             return "Row saved successful";
         }
         return null;
