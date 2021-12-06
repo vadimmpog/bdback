@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.util.Date;
 
 @Getter
@@ -23,4 +24,10 @@ public class Contracts {
     private Date startOfContract;
     private Date endOfContract;
 
+    public void update(Contracts obj){
+        if (this.clientId == null || this.clientId != 0) this.setClientId(obj.getClientId());
+        if (this.paymentState == null || this.paymentState.equals("")) this.setPaymentState(obj.getPaymentState());
+        if (this.startOfContract == null) this.setStartOfContract(obj.getStartOfContract());
+        if (this.endOfContract == null) this.setEndOfContract(obj.getEndOfContract());
+    }
 }

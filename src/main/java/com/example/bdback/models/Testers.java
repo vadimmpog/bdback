@@ -21,4 +21,9 @@ public class Testers {
     private String team;
     private Integer employerId;
 
+    public void update(Testers obj){
+        if (this.employerId == null || this.employerId != 0) this.setEmployerId(obj.getEmployerId());
+        if (this.position == null || this.position.equals("")) this.setPosition(obj.getPosition());
+        if (this.team == null || this.team.equals("")) this.setTeam(obj.getTeam());
+    }
 }

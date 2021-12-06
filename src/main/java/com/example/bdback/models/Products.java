@@ -21,4 +21,9 @@ public class Products {
     private String version;
     private Boolean inProgress;
 
+    public void update(Products p){
+        if (this.productName == null || this.productName.equals("")) this.setProductName(p.getProductName());
+        if (this.version == null || this.version.equals("")) this.setVersion(p.getVersion());
+        if (this.inProgress == null) this.setInProgress(p.getInProgress());
+    }
 }

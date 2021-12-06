@@ -20,4 +20,10 @@ public class Clients {
     private String company;
     private String address;
     private Boolean privateOwner;
+
+    public void update(Clients obj){
+        if (this.company == null || this.company.equals("")) this.setCompany(obj.getCompany());
+        if (this.address == null || this.address.equals("")) this.setAddress(obj.getAddress());
+        if (this.privateOwner == null) this.setPrivateOwner(obj.getPrivateOwner());
+    }
 }

@@ -21,4 +21,11 @@ public class Employees {
     private Integer wage;
     private Boolean onLeave;
     private String workplace;
+
+    public void update(Employees obj){
+        if (this.mail == null || this.mail.equals("")) this.setMail(obj.getMail());
+        if (this.wage == null || this.wage != 0) this.setWage(obj.getWage());
+        if (this.onLeave == null) this.setOnLeave(obj.getOnLeave());
+        if (this.workplace == null || this.workplace.equals("")) this.setWorkplace(obj.getWorkplace());
+    }
 }

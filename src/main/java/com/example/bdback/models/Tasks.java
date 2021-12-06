@@ -22,4 +22,11 @@ public class Tasks {
     private String description;
     private String team;
 
+    public void update(Tasks obj){
+        if (this.projectId == null || this.projectId != 0) this.setProjectId(obj.getProjectId());
+        if (this.employerId == null || this.employerId != 0) this.setEmployerId(obj.getEmployerId());
+        if (this.description == null || this.description.equals("")) this.setDescription(obj.getDescription());
+        if (this.team == null || this.team.equals("")) this.setTeam(obj.getTeam());
+
+    }
 }

@@ -26,19 +26,40 @@ public class TableService {
             privateRepository.save(s);
             return "Row saved successful";
         }
-        return null;
-    }
-
-    public <T> String deleteRow(Integer id, T model){
-        if (model instanceof Private){
-            Private s = (Private) model;
-            privateRepository.deleteById(s.getId());
-            return "Row deleted successful";
+        if (model instanceof Clients){
+            Clients s = (Clients) model;
+            clientsRepository.save(s);
+            return "Row saved successful";
         }
         return null;
     }
 
+    public String deleteRow(String table, Integer id){
+        if (table.equals("private_info")){
+            privateRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("clients")){
+            clientsRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        return "Error not deleted.";
+    }
+
     public <T> String updateRow(T model){
+        if (model instanceof Clients){
+            Clients s = (Clients) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Clients old = clientsRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    clientsRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
         if (model instanceof Private){
             Private s = (Private) model;
             Integer id = s.getId();
