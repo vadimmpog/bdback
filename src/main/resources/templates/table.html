@@ -1,0 +1,159 @@
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tables</title>
+</head>
+<body>
+<h1>Таблица</h1>
+
+<div id="func"></div>
+
+<button onclick="create(keys)">Создать</button><button onclick="update(keys)">Обновить</button>
+<br><br>
+
+<div>Сгруппировать по: </div>
+<select id="rows"></select>
+<button onclick="">Ок</button>
+
+<div id="data"></div>
+
+<script>
+
+    function clear(keys){
+        keys.forEach(key => {
+            document.getElementById(key).value = "";
+        })
+    }
+
+    async function update(keys){
+        let form = {};
+        keys.forEach(key => {
+            form[key] = document.getElementById(key).value;
+        })
+
+        let response = await fetch(document.URL+"/update", {
+            method: "Post",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(form)
+        });
+        if(response.ok){
+            alert("Строка успешно обновлена.");
+        }
+        else {
+            alert("Ошибка "+response.status)
+        }
+        clear(keys);
+        location.reload();
+    }
+
+    async function create(keys){
+        let form = {};
+        keys.forEach(key => {
+            form[key] = document.getElementById(key).value;
+        })
+
+        let response = await fetch(document.URL+"/create", {
+            method: "Post",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(form)
+        });
+        if(response.ok){
+            alert("Строка успешно добавлена.");
+        }
+        else {
+            alert("Ошибка "+response.status)
+        }
+        clear(keys);
+        window.location.reload();
+    }
+
+    async function deleteItem(id){
+        let response = fetch(document.URL+'/delete?id='+id, {
+            method: "Delete"
+        });
+        if(response.ok){
+            alert("Строка удалена успешно.");
+        }
+        else {
+            alert("Ошибка "+ response.status)
+        }
+        location.reload();
+    }
+
+    function createFunc(response, keys){
+        const space = document.getElementById("func");
+        let tbl = document.createElement('table');
+        const tr1 = tbl.insertRow();
+        const tr2 = tbl.insertRow();
+        keys.forEach(
+            key => {
+                const td1 = tr1.insertCell();
+                td1.appendChild(document.createTextNode(key));
+
+                const td2 = tr2.insertCell();
+                let input = document.createElement("input");
+                input.id = key;
+                td2.appendChild(input);
+            })
+        space.appendChild(tbl);
+    }
+
+    function createTable(response, keys){
+        const space = document.getElementById("data");
+        let tbl = document.createElement('table');
+        tbl.style.width = '100px';
+        const tr = tbl.insertRow();
+
+        keys.forEach(
+            key => {
+                const td = tr.insertCell();
+                td.appendChild(document.createTextNode(key));
+                td.style.border = '1px solid black';
+            })
+
+        let i = 0;
+        for(const item of response){
+            const tr = tbl.insertRow();
+            Object.keys(item).forEach(key => {
+                const td = tr.insertCell();
+                td.appendChild(document.createTextNode(item[key]));
+                td.style.border = '1px solid black';
+            })
+            const td = tr.insertCell();
+            let button =  document.createElement("button");
+            button.id=item.id;
+            button.textContent="Удалить";
+            button.onclick= function () {
+                deleteItem(this.id);
+            };
+            td.appendChild(button);
+            i+=1;
+        }
+        space.appendChild(tbl);
+    }
+
+    async function load(){
+        let response = await fetch("/all")
+            .then(function(response) {
+                if (!response.ok) {
+                    alert("Невозможно загрузить продукты. Ошибка "+ response.status)
+                }
+                return response.json()
+            });
+        let keys = Object.keys(response[0]);
+        createFunc(response, keys);
+        createTable(response, keys);
+        return keys;
+    }
+
+    let keys = load();
+</script>
+<br>
+<a href="/page">Назад</a>
+</body>
+</html>
+
