@@ -9,17 +9,19 @@
 
 <h1>Таблица</h1>
 
-<table>
+<table id="func">
     <tr><th>id</th><th>Название товара</th><th>Описание</th><th>Количество</th><th>Цена р.</th></tr>
     <tr><td><input id="id"></td><td><input id="name"></td><td><input id="description"></td><td><input id="quantity"></td><td><input id="price"></td></tr>
 </table>
 
 <button onclick="create()">Создать</button><button onclick="update()">Обновить</button>
 
-<div id="table"></div>
+<table id="data"></table>
 
 
 <script>
+    let keys = [];
+
     function clear(){
         ["id", "name", "description", "quantity", "price"].forEach(text => {
             document.getElementById(text).value = "";
@@ -133,6 +135,7 @@
                 }
                 return response.json()
             });
+        createFunc(response)
         createTable(response);
     }
 

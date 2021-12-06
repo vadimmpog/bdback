@@ -101,57 +101,49 @@ public class MainController {
 
     /*----------------------------------all---------------------------------------*/
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Private> allRows1(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-private", method = RequestMethod.GET)
+    public List<Private> allRows1() {
+        return service.getAllPrivateRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Clients> allRows2(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-clients", method = RequestMethod.GET)
+    public List<Clients> allRows2() {
+        return service.getAllClientsRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Contracts> allRows3(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-contracts", method = RequestMethod.GET)
+    public List<Contracts> allRows3() {
+        return service.getAllContractsRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Developers> allRows4(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-developers", method = RequestMethod.GET)
+    public List<Developers> allRows4() {
+        return service.getAllDevelopersRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Employees> allRows5(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-employees", method = RequestMethod.GET)
+    public List<Employees> allRows5() {
+        return service.getAllEmployeesRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Products> allRows6(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-products", method = RequestMethod.GET)
+    public List<Products> allRows6() {
+        return service.getAllProductsRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Tasks> allRows7(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-tasks", method = RequestMethod.GET)
+    public List<Tasks> allRows7() {
+        return service.getAllTasksRows();
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET,
-    params = {"tablename"})
-    public List<Testers> allRows8(@RequestParam("tablename") String tablename) {
-        return service.getAllRows(tablename);
+    @RequestMapping(value = "/all-testers", method = RequestMethod.GET)
+    public List<Testers> allRows8() {
+        return service.getAllTestersRows();
     }
 
     /*----------------------------------delete---------------------------------------*/
 
-    @RequestMapping(value = "/delete-row", method = RequestMethod.DELETE,
+    @RequestMapping(value = "/delete-row", method = RequestMethod.POST,
         params = {"id", "tablename"})
     public String deleteRow1(@RequestParam("id") Integer id, @RequestParam("tablename") String tablename){
         return service.deleteRow(id, tablename);
@@ -159,10 +151,22 @@ public class MainController {
 
     /*----------------------------------filter---------------------------------------*/
 
-    @RequestMapping(value = "/sort-table", method = RequestMethod.GET,
-            params = {"row", "tablename"})
-    public String deleteRow1(@RequestParam("row") String row, @RequestParam("tablename") String tablename){
-        return service.sortTable(row, tablename);
+    @RequestMapping(value = "/sort-group", method = RequestMethod.POST,
+            params = {"row"})
+    public <T> List<T> groupTable(@RequestParam("row") String row, @RequestBody() T model){
+        return service.sortGroup(row, model);
+    }
+
+    @RequestMapping(value = "/sort-where", method = RequestMethod.POST,
+            params = {"row"})
+    public <T> List<T> whereTable(@RequestParam("row") String row, @RequestBody() T model){
+        return service.sortWhere(row, model);
+    }
+
+    @RequestMapping(value = "/sort-like", method = RequestMethod.POST,
+            params = {"row"})
+    public <T> List<T> likeTable(@RequestParam("row") String row, @RequestBody() T model){
+        return service.sortLike(row, model);
     }
 
 }
