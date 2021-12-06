@@ -204,7 +204,7 @@ public class MainController {
 
     @RequestMapping(value = "/sort-like", method = RequestMethod.POST,
             params = {"row"})
-    public <T> List<T> likeTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String like, @RequestBody String like){
+    public <T> List<T> likeTable(@RequestParam("column") String column, @RequestBody() String table, @RequestBody String like){
         return service.sortLike(table, like, column);
     }
 
