@@ -183,10 +183,10 @@ public class MainController {
         return service.deleteRow("testers", id);
     }
 
-    /*----------------------------------filter---------------------------------------*/
+    /*----------------------------------sort---------------------------------------*/
 
     @RequestMapping(value = "/sort/group", method = RequestMethod.POST)
-    public <T> List<T> groupTable(@RequestBody String data){
+    public <T> List<T> groupTable(@RequestBody String data) {
         JSONObject dataJson = new JSONObject(data);
         String column = dataJson.getString("column");
         String table = dataJson.getString("table");
@@ -194,17 +194,112 @@ public class MainController {
         return service.sortGroup(column, table, order);
     }
 
+    /*----------------------------------where---------------------------------------*/
+
+    @RequestMapping(value = "/clients/where", method = RequestMethod.POST)
+    public List<Clients> whereTable(@RequestBody Clients client){
+        return service.sortWhere(client);
+    }
+
+    @RequestMapping(value = "/contracts/where", method = RequestMethod.POST)
+    public List<Contracts> whereTable(@RequestBody Contracts contract){
+        return service.sortWhere(contract);
+    }
+
+    @RequestMapping(value = "/developers/where", method = RequestMethod.POST)
+    public List<Developers> whereTable(@RequestBody Developers developer){
+        return service.sortWhere(developer);
+    }
+
+    @RequestMapping(value = "/employees/where", method = RequestMethod.POST)
+    public List<Employees> whereTable(@RequestBody Employees employer){
+        return service.sortWhere(employer);
+    }
+
     @RequestMapping(value = "/private_info/where", method = RequestMethod.POST)
     public List<Private> whereTable(@RequestBody Private info){
         return service.sortWhere(info);
     }
 
+    @RequestMapping(value = "/products/where", method = RequestMethod.POST)
+    public List<Products> whereTable(@RequestBody Products product){
+        return service.sortWhere(product);
+    }
+
+    @RequestMapping(value = "/tasks/where", method = RequestMethod.POST)
+    public List<Tasks> whereTable(@RequestBody Tasks task){
+        return service.sortWhere(task);
+    }
+
+    @RequestMapping(value = "/testers/where", method = RequestMethod.POST)
+    public List<Testers> whereTable(@RequestBody Testers tester){
+        return service.sortWhere(tester);
+    }
+
+    /*----------------------------------like---------------------------------------*/
+
+    @RequestMapping(value = "/clients/like", method = RequestMethod.POST)
+    public List<Clients> likeTable1(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "clients", like);
+    }
+
+    @RequestMapping(value = "/contracts/like", method = RequestMethod.POST)
+    public List<Contracts> likeTable2(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "contracts", like);
+    }
+
+    @RequestMapping(value = "/developers/like", method = RequestMethod.POST)
+    public List<Developers> likeTable3(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "developers", like);
+    }
+
+    @RequestMapping(value = "/employees/like", method = RequestMethod.POST)
+    public List<Employees> likeTable4(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "employees", like);
+    }
+
     @RequestMapping(value = "/private_info/like", method = RequestMethod.POST)
-    public List<Private> likeTable(@RequestBody String data){
+    public List<Private> likeTable5(@RequestBody String data){
         JSONObject dataJson = new JSONObject(data);
         String column = dataJson.getString("column");
         String like = dataJson.getString("like");
         return service.sortLike(column, "private_info", like);
+    }
+
+    @RequestMapping(value = "/products/like", method = RequestMethod.POST)
+    public List<Products> likeTable6(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "products", like);
+    }
+
+    @RequestMapping(value = "/tasks/like", method = RequestMethod.POST)
+    public List<Tasks> likeTable7(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "tasks", like);
+    }
+
+    @RequestMapping(value = "/testers/like", method = RequestMethod.POST)
+    public List<Testers> likeTable8(@RequestBody String data){
+        JSONObject dataJson = new JSONObject(data);
+        String column = dataJson.getString("column");
+        String like = dataJson.getString("like");
+        return service.sortLike(column, "testers", like);
     }
 
 }

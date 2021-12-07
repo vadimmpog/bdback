@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -144,9 +145,37 @@ public class TableService {
         return testersRepository.findAll();
     }
 
-    /*-------------------------------------------?sort?-------------------------------------------------*/
+    /*-------------------------------------------sort-------------------------------------------------*/
 
     public <T> List<T> sortGroup(String column, String table, String order){
+        if(table.equals("clients")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) clientsRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) clientsRepository.findAll(Sort.by(column).descending());
+            }
+        }
+        if(table.equals("contracts")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) contractsRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) contractsRepository.findAll(Sort.by(column).descending());
+            }
+        }
+        if(table.equals("developers")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) developersRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) developersRepository.findAll(Sort.by(column).descending());
+            }
+        }
+        if(table.equals("employees")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) employeesRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) employeesRepository.findAll(Sort.by(column).descending());
+            }
+        }
         if(table.equals("private_info")){
             if (order.equals("ASC")){
                 return (ArrayList<T>) privateRepository.findAll(Sort.by(column));
@@ -154,23 +183,103 @@ public class TableService {
                 return (ArrayList<T>) privateRepository.findAll(Sort.by(column).descending());
             }
         }
-//        if(table.equals("clients")){
-//            if (order.equals("ASC")){
-//                return (List<T>) privateRepository.orderByASC(column);
-//            }else if (order.equals("DESC")){
-//                return (List<T>) privateRepository.orderByDESC(column);
-//            }
-//        }
+        if(table.equals("products")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) productsRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) productsRepository.findAll(Sort.by(column).descending());
+            }
+        }
+        if(table.equals("tasks")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) tasksRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) tasksRepository.findAll(Sort.by(column).descending());
+            }
+        }
+        if(table.equals("testers")){
+            if (order.equals("ASC")){
+                return (ArrayList<T>) testersRepository.findAll(Sort.by(column));
+            }else if (order.equals("DESC")){
+                return (ArrayList<T>) testersRepository.findAll(Sort.by(column).descending());
+            }
+        }
         return null;
     }
+
     public <T> List<T> sortWhere(T model){
+        if(model instanceof Clients){
+            Example<Clients> ex = Example.of((Clients) model);
+            return (ArrayList<T>) clientsRepository.findAll(ex);
+        }
+        if(model instanceof Contracts){
+            Example<Contracts> ex = Example.of((Contracts) model);
+            return (ArrayList<T>) contractsRepository.findAll(ex);
+        }
+        if(model instanceof Developers){
+            Example<Developers> ex = Example.of((Developers) model);
+            return (ArrayList<T>) developersRepository.findAll(ex);
+        }
+        if(model instanceof Employees){
+            Example<Employees> ex = Example.of((Employees) model);
+            return (ArrayList<T>) employeesRepository.findAll(ex);
+        }
         if(model instanceof Private){
             Example<Private> ex = Example.of((Private) model);
             return (ArrayList<T>) privateRepository.findAll(ex);
         }
+        if(model instanceof Products){
+            Example<Products> ex = Example.of((Products) model);
+            return (ArrayList<T>) productsRepository.findAll(ex);
+        }
+        if(model instanceof Tasks){
+            Example<Tasks> ex = Example.of((Tasks) model);
+            return (ArrayList<T>) tasksRepository.findAll(ex);
+        }
+        if(model instanceof Testers){
+            Example<Testers> ex = Example.of((Testers) model);
+            return (ArrayList<T>) testersRepository.findAll(ex);
+        }
         return null;
     }
+
     public <T> List<T> sortLike(String column, String table, String like){
+        if(table.equals("clients")) {
+            switch (column) {
+                case "company": {
+                    return (ArrayList<T>) clientsRepository.findByCompanyLike(like);
+                }
+                case "address": {
+                    return (ArrayList<T>) clientsRepository.findByAddressLike(like);
+                }
+            }
+        }
+        if(table.equals("contracts")) {
+            if(Objects.equals(column, "paymentState")){
+                    return (ArrayList<T>) contractsRepository.findByPaymentStateLike(like);
+            }
+        }
+        if(table.equals("developers")) {
+            switch (column) {
+                case "position": {
+                    return (ArrayList<T>) developersRepository.findByPositionLike(like);
+                }
+                case "team": {
+                    return (ArrayList<T>) developersRepository.findByTeamLike(like);
+                }
+            }
+        }
+        if(table.equals("employees")) {
+            switch (column) {
+                case "mail": {
+                    ArrayList<T> a = (ArrayList<T>) employeesRepository.findByMailLike(like);
+                    return a;
+                }
+                case "workplace": {
+                    return (ArrayList<T>) employeesRepository.findByWorkplaceLike(like);
+                }
+            }
+        }
         if(table.equals("private_info")){
             switch (column){
                 case "firstname": {
@@ -178,9 +287,6 @@ public class TableService {
                 }
                 case "lastname": {
                     return (ArrayList<T>) privateRepository.findByLastnameLike(like);
-                }
-                case "birthdate": {
-                    return (ArrayList<T>) privateRepository.findByBirthdateLike(like);
                 }
                 case "phonenum": {
                     return (ArrayList<T>) privateRepository.findByPhonenumLike(like);
@@ -191,12 +297,40 @@ public class TableService {
                 case "address": {
                     return (ArrayList<T>) privateRepository.findByAddressLike(like);
                 }
-                case "employerId": {
-                    return (ArrayList<T>) privateRepository.findByEmployerIdLike(like);
+            }
+        }
+        if(table.equals("products")) {
+            switch (column) {
+                case "productName": {
+                    return (ArrayList<T>) productsRepository.findByProductNameLike(like);
+                }
+                case "version": {
+                    return (ArrayList<T>) productsRepository.findByVersionLike(like);
                 }
             }
         }
-
+        if(table.equals("tasks")) {
+            switch (column) {
+                case "description": {
+                    return (ArrayList<T>) tasksRepository.findByDescriptionLike(like);
+                }
+                case "team": {
+                    return (ArrayList<T>) tasksRepository.findByTeamLike(like);
+                }
+            }
+        }
+        if(table.equals("testers")) {
+            switch (column) {
+                case "position": {
+                    ArrayList<T> a = (ArrayList<T>) testersRepository.findByPositionLike(like);
+                    return a;
+//                    return (ArrayList<T>) testersRepository.findByPositionLike(like);
+                }
+                case "team": {
+                    return (ArrayList<T>) testersRepository.findByTeamLike(like);
+                }
+            }
+        }
         return null;
     }
 

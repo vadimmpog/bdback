@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -18,6 +17,7 @@ import java.util.Date;
 public class Contracts {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     private Integer projectId;
     private Integer clientId;
     private String paymentState;

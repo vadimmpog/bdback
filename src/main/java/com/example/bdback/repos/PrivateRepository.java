@@ -10,9 +10,7 @@ import java.util.List;
 public interface PrivateRepository extends JpaRepository<Private, Integer> {
     List<Private> findByFirstnameLike(String expr);
     List<Private> findByLastnameLike(String expr);
-    List<Private> findByBirthdateLike(String expr);
     List<Private> findByPhonenumLike(String expr);
     List<Private> findByInsuranceLike(String expr);
     List<Private> findByAddressLike(String expr);
-    List<Private> findByEmployerIdLike(String expr);
 }
