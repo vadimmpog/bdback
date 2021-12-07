@@ -272,8 +272,7 @@ public class TableService {
         if(table.equals("employees")) {
             switch (column) {
                 case "mail": {
-                    ArrayList<T> a = (ArrayList<T>) employeesRepository.findByMailLike(like);
-                    return a;
+                    return (ArrayList<T>) employeesRepository.findByMailLike(like);
                 }
                 case "workplace": {
                     return (ArrayList<T>) employeesRepository.findByWorkplaceLike(like);
@@ -322,8 +321,7 @@ public class TableService {
         if(table.equals("testers")) {
             switch (column) {
                 case "position": {
-                    ArrayList<T> a = (ArrayList<T>) testersRepository.findByPositionLike(like);
-                    return a;
+                    return (ArrayList<T>) testersRepository.findByPositionLike(like);
 //                    return (ArrayList<T>) testersRepository.findByPositionLike(like);
                 }
                 case "team": {
