@@ -2,6 +2,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Tables</title>
+    <style>
+        .layer2 {
+            margin-left: 4.5%;
+        }
+    </style>
 </head>
 <body>
 <h1>Список таблиц</h1>
@@ -17,8 +22,8 @@
 <select id="columns"></select>
 В обратном порядке<input type="checkbox" id="descending">
 <button onclick="sortBy()">Ок</button><br><br>
-<div>Или найти: </div>
-<input id="find">
+Или найти:<select id="second" class="layer2"></select><br>
+<input id="find"><input id="second_input">
 <button onclick="where()">Найти</button><br><br>
 <button onclick="like()">Найти похожее</button><br><br>
 <div id="data"></div>
@@ -40,12 +45,20 @@
         let url = '/main/'+table;
         let keys = await load(url);
         let columns = document.getElementById('columns');
+        let columns2 = document.getElementById('second');
         columns.innerHTML = "";
+        columns2.innerHTML = "";
         keys.forEach(text => {
             let opt = document.createElement('option');
             opt.value = text;
             opt.innerHTML = text;
             columns.appendChild(opt);
+        })
+        keys.forEach(text => {
+            let opt = document.createElement('option');
+            opt.value = text;
+            opt.innerHTML = text;
+            columns2.appendChild(opt);
         })
     }
 
@@ -234,8 +247,22 @@
             return response.json();
         });
         let keys = Object.keys(response[0]);
+
+        let find_second = document.getElementById('second_input').value;
+        if(find_second != null && find_second !== ""){
+            let column = document.getElementById('second').value;
+            let response_v2 = [];
+            for(const item of response) {
+                if(item[column].toString() === find_second){
+                    response_v2.push(item);
+                }
+            }
+            console.log(response_v2)
+            response = response_v2;
+        }
         createTable(response, keys);
         document.getElementById('find').value="";
+        document.getElementById('second_input').value="";
     }
 
     async function like(){
@@ -260,8 +287,22 @@
             return response.json();
         });
         let keys = Object.keys(response[0]);
+
+        let find_second = document.getElementById('second_input').value;
+        if(find_second != null && find_second !== ""){
+            let column = document.getElementById('second').value;
+            let response_v2 = [];
+            for(const item of response) {
+                if(item[column].toString() === find_second){
+                    response_v2.push(item);
+                }
+            }
+            console.log(response_v2)
+            response = response_v2;
+        }
         createTable(response, keys);
         document.getElementById('find').value="";
+        document.getElementById('second_input').value="";
     }
 
     createList();

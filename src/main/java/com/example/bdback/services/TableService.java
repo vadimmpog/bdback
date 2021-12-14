@@ -74,14 +74,51 @@ public class TableService {
             clientsRepository.deleteById(id);
             return "Row deleted successful";
         }
+        if (table.equals("contracts")){
+            contractsRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("developers")){
+            developersRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("employees")){
+            employeesRepository.deleteById(id);
+            return "Row deleted successful";
+        }
         if (table.equals("private_info")){
             privateRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("products")){
+            productsRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("tasks")){
+            tasksRepository.deleteById(id);
+            return "Row deleted successful";
+        }
+        if (table.equals("testers")){
+            testersRepository.deleteById(id);
             return "Row deleted successful";
         }
         return "Error not deleted.";
     }
 
     public <T> String updateRow(T model){
+        if (model instanceof Private){
+            Private s = (Private) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Private old = privateRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    privateRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
         if (model instanceof Clients){
             Clients s = (Clients) model;
             Integer id = s.getId();
@@ -95,14 +132,79 @@ public class TableService {
             }
             return "No row with such id";
         }
-        if (model instanceof Private){
-            Private s = (Private) model;
+        if (model instanceof Contracts){
+            Contracts s = (Contracts) model;
             Integer id = s.getId();
             if(id != null && id != 0){
-                Private old = privateRepository.findById(id).orElse(null);
+                Contracts old = contractsRepository.findById(id).orElse(null);
                 if(old != null) {
                     s.update(old);
-                    privateRepository.save(s);
+                    contractsRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
+        if (model instanceof Developers){
+            Developers s = (Developers) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Developers old = developersRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    developersRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
+        if (model instanceof Employees){
+            Employees s = (Employees) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Employees old = employeesRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    employeesRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
+        if (model instanceof Products){
+            Products s = (Products) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Products old = productsRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    productsRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
+        if (model instanceof Tasks){
+            Tasks s = (Tasks) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Tasks old = tasksRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    tasksRepository.save(s);
+                    return "Row updated successful";
+                }
+            }
+            return "No row with such id";
+        }
+        if (model instanceof Testers){
+            Testers s = (Testers) model;
+            Integer id = s.getId();
+            if(id != null && id != 0){
+                Testers old = testersRepository.findById(id).orElse(null);
+                if(old != null) {
+                    s.update(old);
+                    testersRepository.save(s);
                     return "Row updated successful";
                 }
             }
